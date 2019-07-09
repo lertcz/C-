@@ -1,0 +1,7 @@
+E:\Michal\C#\Calculator\ConsoleApp1\bin\Release\Calculator.exe.config
+E:\Michal\C#\Calculator\ConsoleApp1\bin\Release\Calculator.exe
+E:\Michal\C#\Calculator\ConsoleApp1\bin\Release\Calculator.pdb
+E:\Michal\C#\Calculator\ConsoleApp1\obj\Release\ConsoleApp1.csprojAssemblyReference.cache
+E:\Michal\C#\Calculator\ConsoleApp1\obj\Release\ConsoleApp1.csproj.CoreCompileInputs.cache
+E:\Michal\C#\Calculator\ConsoleApp1\obj\Release\Calculator.exe
+E:\Michal\C#\Calculator\ConsoleApp1\obj\Release\Calculator.pdb
