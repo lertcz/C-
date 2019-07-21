@@ -1,0 +1,53 @@
+﻿<Window x:Class="RozvrhHodin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RozvrhHodin"
+        mc:Ignorable="d"
+        Title="Rozvrh" Height="550" Width="431" HorizontalAlignment="Center" VerticalAlignment="Center" Closing="Window_Closing">
+    <Grid Height="520" VerticalAlignment="Top" Margin="0,0,-0.2,0" Width="425" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="Den" HorizontalAlignment="Left" Margin="80,20,0,0" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" FontSize="18">
+            <ComboBoxItem Content="Pondělí" FontSize="18"/>
+            <ComboBoxItem Content="Úterý" FontSize="18"/>
+            <ComboBoxItem Content="Středa" FontSize="18"/>
+            <ComboBoxItem Content="Čtvrtek" FontSize="18"/>
+            <ComboBoxItem Content="Pátek" FontSize="18"/>
+        </ComboBox>
+        <Label Content="Den:" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top" Width="50" Height="35" FontSize="20"/>
+        <ComboBox x:Name="Hodina" HorizontalAlignment="Left" Margin="280,20,0,0" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" FontSize="18">
+            <ComboBoxItem Content="1" FontSize="18"/>
+            <ComboBoxItem Content="2" FontSize="18"/>
+            <ComboBoxItem Content="3" FontSize="18"/>
+            <ComboBoxItem Content="4" FontSize="18"/>
+            <ComboBoxItem Content="5" FontSize="18"/>
+            <ComboBoxItem Content="6" FontSize="18"/>
+            <ComboBoxItem Content="7" FontSize="18"/>
+            <ComboBoxItem Content="8" FontSize="18"/>
+            <ComboBoxItem Content="9" FontSize="18"/>
+        </ComboBox>
+        <Label Content="Hodina:" HorizontalAlignment="Left" Margin="199,20,0,0" VerticalAlignment="Top" Width="77" Height="35" FontSize="20"/>
+        <Button x:Name="Save" Content="Vložit" HorizontalAlignment="Left" Margin="25,135,0,0" VerticalAlignment="Top" Width="120" Height="40" FontSize="16" Click="Save_Click"/>
+        <Button x:Name="Delete" Content="Vymazat" HorizontalAlignment="Left" Margin="150,135,0,0" VerticalAlignment="Top" Width="125" Height="17.5" FontSize="12" Click="Delete_Click"/>
+        <Button x:Name="Deleteall" Content="Vymazat vše" HorizontalAlignment="Left" Margin="150,158,0,0" VerticalAlignment="Top" Width="125" Height="17.5" FontSize="12" Click="Deleteall_Click"/>
+        <Button x:Name="View" Content="Zobrazit" Margin="280,135,0,0" VerticalAlignment="Top" Height="40" FontSize="16" HorizontalAlignment="Left" Width="120" Click="View_Click"/>
+        <Label Content="Předmět:" HorizontalAlignment="Left" Margin="65,80,0,0" VerticalAlignment="Top" Width="92" Height="35" FontSize="20"/>
+        <ComboBox x:Name="Predmet" HorizontalAlignment="Left" Margin="156,80,0,0" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" FontSize="18">
+            <ComboBoxItem Content="AJ" FontSize="18"/>
+            <ComboBoxItem Content="M" FontSize="18"/>
+            <ComboBoxItem Content="CH" FontSize="18"/>
+            <ComboBoxItem Content="ČJ" FontSize="18"/>
+            <ComboBoxItem Content="NJ" FontSize="18"/>
+            <ComboBoxItem Content="TV" FontSize="18"/>
+            <ComboBoxItem Content="VV" FontSize="18"/>
+            <ComboBoxItem Content="PŘ" FontSize="18"/>
+            <ComboBoxItem Content="Z" FontSize="18"/>
+        </ComboBox>
+        <DataGrid x:Name="DG1" HorizontalAlignment="Left" Height="245" Margin="25,200,0,0" VerticalAlignment="Top" Width="375" IsEnabled="False" RowHeight="43"/>
+        <Label Content="Created by Michal Šesták" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="273,484,0,0"/>
+
+    </Grid>
+</Window>
