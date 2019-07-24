@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+using System.IO;
 
 namespace RozvrhHodin
 {
@@ -26,116 +27,67 @@ namespace RozvrhHodin
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Michal\C#\RozvrhHodin\RozvrhHodin\Rozvrh.mdf;Integrated Security=True");
-
+		// if u by somehow downloaded my project :D find ur datasource to the DB
+		//@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Michal\C#\RozvrhHodin\RozvrhHodin\Rozvrh.mdf;Integrated Security=True"
+		SqlConnection conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=E:\Michal\C#\Csharp-master\RozvrhHodin\RozvrhHodin\Rozvrh.mdf;Integrated Security=True");
+        public string Table = "";
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            conn.Open();            
-            string day;
-            string query = "";
-            switch (Den.Text)
-            {
-                case "Pondělí":
-                    day = "Pondelí";
-                    query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + Predmet.Text + "' where rozvrh = '" + day + "'";
-                    break;
-                case "Úterý":
-                    day = "Úterý";
-                    query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + Predmet.Text + "' where rozvrh = '" + day + "'";
-                    break;
-                case "Středa":
-                    day = "Streda";
-                    query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + Predmet.Text + "' where rozvrh = '" + day + "'";
-                    break;
-                case "Čtvrtek":
-                    day = "Ctvrtek";
-                    query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + Predmet.Text + "' where rozvrh = '" + day + "'";
-                    break;
-                case "Pátek":
-                    day = "Pátek";
-                    query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + Predmet.Text + "' where rozvrh = '" + day + "'";
-                    break;
-                
-            }            
+			OpenConnection();
+			//conn.Open();            
+            string query = query = "update " + Table + " set " + ("_" + Hodina.Text) + " = '" + Predmet.Text + "' where rozvrh = '" + Den.Text + "'";
             SqlDataAdapter SDA = new SqlDataAdapter(query,conn);
             SDA.SelectCommand.ExecuteNonQuery();
-            conn.Close();
+			CloseConnection();
+			//conn.Close();
             showw();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Ujiste se ze mate spravně den a hodinu!", "Opravdu chcete vymazat záznam?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                conn.Open();
-                string nott = "";
-                string day;
-                string query = "";
-                switch (Den.Text)
-                {
-                    case "Pondělí":
-                        day = "Pondelí";
-                        query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + nott + "' where rozvrh = '" + day + "'";
-                        break;
-                    case "Úterý":
-                        day = "Úterý";
-                        query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + nott + "' where rozvrh = '" + day + "'";
-                        break;
-                    case "Středa":
-                        day = "Streda";
-                        query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + nott + "' where rozvrh = '" + day + "'";
-                        break;
-                    case "Čtvrtek":
-                        day = "Ctvrtek";
-                        query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + nott + "' where rozvrh = '" + day + "'";
-                        break;
-                    case "Pátek":
-                        day = "Pátek";
-                        query = "update rozvrhodinn2 set " + ("_" + Hodina.Text) + " = '" + nott + "' where rozvrh = '" + day + "'";
-                        break;
-                }
+				OpenConnection();
+				//conn.Open();
+                string query = "update " + Table + " set " + ("_" + Hodina.Text) + " = '" + "" + "' where rozvrh = '" + Den.Text + "'";
                 SqlDataAdapter SDA = new SqlDataAdapter(query, conn);
                 SDA.SelectCommand.ExecuteNonQuery();
-                conn.Close();
+				CloseConnection();
+				//conn.Close();
                 showw();
-            }
-            else
-            {
-                
-            }
-            
         }
 
         private void Deleteall_Click(object sender, RoutedEventArgs e)
         {
-            conn.Open();            
-            SqlDataAdapter SDA = new SqlDataAdapter("delete from rozvrhodinn2", conn);
+			OpenConnection();      
+			//conn.Close();
+            SqlDataAdapter SDA = new SqlDataAdapter("delete from " + Table, conn);
             SDA.SelectCommand.ExecuteNonQuery();
-            SqlDataAdapter SDA1 = new SqlDataAdapter("insert into rozvrhodinn2 (rozvrh) values ('Pondelí')", conn);
+            SqlDataAdapter SDA1 = new SqlDataAdapter("insert into " + Table + " (rozvrh) values ('Pondelí')", conn);
             SDA1.SelectCommand.ExecuteNonQuery();
-            SqlDataAdapter SDA2 = new SqlDataAdapter("insert into rozvrhodinn2 (rozvrh) values ('Úterý')", conn);
+            SqlDataAdapter SDA2 = new SqlDataAdapter("insert into " + Table + " (rozvrh) values ('Úterý')", conn);
             SDA2.SelectCommand.ExecuteNonQuery();
-            SqlDataAdapter SDA3 = new SqlDataAdapter("insert into rozvrhodinn2 (rozvrh) values ('Streda')", conn);
+            SqlDataAdapter SDA3 = new SqlDataAdapter("insert into " + Table + " (rozvrh) values ('Streda')", conn);
             SDA3.SelectCommand.ExecuteNonQuery();
-            SqlDataAdapter SDA4 = new SqlDataAdapter("insert into rozvrhodinn2 (rozvrh) values ('Ctvrtek')", conn);
+            SqlDataAdapter SDA4 = new SqlDataAdapter("insert into " + Table + " (rozvrh) values ('Ctvrtek')", conn);
             SDA4.SelectCommand.ExecuteNonQuery();
-            SqlDataAdapter SDA5 = new SqlDataAdapter("insert into rozvrhodinn2 (rozvrh) values ('Pátek')", conn);
+            SqlDataAdapter SDA5 = new SqlDataAdapter("insert into " + Table + " (rozvrh) values ('Pátek')", conn);
             SDA5.SelectCommand.ExecuteNonQuery();
-            conn.Close();
-
+			CloseConnection();
+			//conn.Close();
             showw();
         }
 
-        private void View_Click(object sender, RoutedEventArgs e)
-        {
-            showw();
-        }
+		private void Help_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("1.'Vložit' zvolte den, hodinu a předmět.\n2.'Vymazat' ujistete se ze mate správný den a hodinu.\n3.'Vymazat vše' příjdete o celý rozvrh.\n4.'Zobrazit' po změně týdne kliknete na Zobrazit", "Help", MessageBoxButton.OK, MessageBoxImage.Information);
+		}
+
         void showw()
         {
-            conn.Open();
+			OpenConnection();
+			//conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from Rozvrhodinn2";
+            cmd.CommandText = "select * from " + Table;
             cmd.ExecuteNonQuery();
             DataSet dt = new DataSet();
             //DataTable dt = new DataTable();
@@ -143,7 +95,8 @@ namespace RozvrhHodin
             da.Fill(dt);
             //DG1.DataContext = dt.DefaultView;
             DG1.ItemsSource = dt.Tables[0].DefaultView;
-            conn.Close();
+			CloseConnection();
+			//conn.Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -156,6 +109,48 @@ namespace RozvrhHodin
             {
                 e.Cancel = true;
             }            
+        }
+		public void OpenConnection()
+		{
+			if (conn.State != System.Data.ConnectionState.Open)
+			{
+				conn.Open();
+			}
+		}
+		public void CloseConnection()
+		{
+			if (conn.State != System.Data.ConnectionState.Closed)
+			{
+				conn.Close();
+			}
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			showw();
+		}
+
+        private void Tyden_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //ComboBox box = sender as ComboBox;
+            if (!Tyden.IsLoaded)
+            {
+                Table = "rozvrhodinnS";
+            }
+            else
+            {
+                switch (Tyden.SelectedIndex)
+                {
+                    case 0:
+                        Table = "rozvrhodinnS";
+                        showw();
+                        break;
+                    case 1:
+                        Table = "rozvrhodinnL";
+                        showw();
+                        break;
+                }
+            }
         }
     }
 }
